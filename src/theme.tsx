@@ -63,6 +63,7 @@ declare module '@mui/material/TextField' {
 
 declare module '@mui/material/Alert' {
   interface AlertPropsColorOverrides {
+    secondary: true;
     dystopia: true;
     surface: true;
   }

@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import MuiCard, { type CardProps as MuiCardProps } from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import MuiCard, { type CardProps as MuiCardProps } from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-export interface CardProps extends MuiCardProps {
+export interface CardProps extends Omit<MuiCardProps, "title"> {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   action?: React.ReactNode;
-  headerSx?: MuiCardProps['sx'];
+  headerSx?: MuiCardProps["sx"];
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(function Card(
@@ -24,7 +24,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(function Card(
           <Stack direction="row" justifyContent="space-between" spacing={2}>
             <Stack spacing={0.5}>
               {title ? <Typography variant="h6">{title}</Typography> : null}
-              {subtitle ? <Typography color="text.secondary">{subtitle}</Typography> : null}
+              {subtitle ? (
+                <Typography color="text.secondary">{subtitle}</Typography>
+              ) : null}
             </Stack>
             {action}
           </Stack>

@@ -121,7 +121,7 @@ export default function App() {
 
       <SearchField label="Buscar" sx={{ my: 2 }} />
 
-      <div className="acme-card-grid">
+      <div className="JaviLopezV-card-grid">
         <FeatureCard
           title="Ventas"
           description="Resumen del canal online"

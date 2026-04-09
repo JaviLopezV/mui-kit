@@ -32,7 +32,7 @@ const orders = [
 function DemoPage() {
   return (
     <AppShell
-      title="Acme UI Kit"
+      title="JaviLopezV UI Kit"
       actions={
         <>
           <Button color="secondary">Secundario</Button>
@@ -60,7 +60,7 @@ function DemoPage() {
           subtitle="Ejemplo de uso con botones, tarjetas, tablas y estados vacíos."
         />
 
-        <div className="acme-card-grid">
+        <div className="JaviLopezV-card-grid">
           <StatCard
             label="Pedidos"
             value="1.284"
@@ -85,7 +85,7 @@ function DemoPage() {
           title="Módulos"
           subtitle="Cards reutilizables para paneles, listados o landings."
         >
-          <div className="acme-card-grid">
+          <div className="JaviLopezV-card-grid">
             <FeatureCard
               title="Pedidos"
               description="Visualiza pedidos, estados y embudos de conversión."

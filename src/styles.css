@@ -1,8 +1,8 @@
 :root {
-  --acme-primary: #67c4ff;
-  --acme-primary-dark: #2196d9;
-  --acme-background: #f5fbff;
-  --acme-text: #163247;
+  --JaviLopezV-primary: #67c4ff;
+  --JaviLopezV-primary-dark: #2196d9;
+  --JaviLopezV-background: #f5fbff;
+  --JaviLopezV-text: #163247;
 }
 
 html,
@@ -12,17 +12,17 @@ body {
 }
 
 body {
-  color: var(--acme-text);
-  background: var(--acme-background);
+  color: var(--JaviLopezV-text);
+  background: var(--JaviLopezV-background);
 }
 
-.acme-card-grid {
+.JaviLopezV-card-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-.acme-stack-grid {
+.JaviLopezV-stack-grid {
   display: grid;
   gap: 1.25rem;
 }

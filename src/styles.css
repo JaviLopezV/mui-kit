@@ -1,0 +1,28 @@
+:root {
+  --acme-primary: #67c4ff;
+  --acme-primary-dark: #2196d9;
+  --acme-background: #f5fbff;
+  --acme-text: #163247;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--acme-text);
+  background: var(--acme-background);
+}
+
+.acme-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.acme-stack-grid {
+  display: grid;
+  gap: 1.25rem;
+}

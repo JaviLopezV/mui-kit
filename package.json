@@ -1,0 +1,46 @@
+{
+  "name": "@JaviLopezV/mui-kit",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Librería de componentes reutilizables basada en Material UI para proyectos React y Next.js.",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --splitting false --clean --external react,react-dom,next,@mui/material,@mui/icons-material,@emotion/react,@emotion/styled && cp src/styles.css dist/styles.css",
+    "dev": "tsup src/index.ts --watch --format esm,cjs --dts --splitting false --external react,react-dom,next,@mui/material,@mui/icons-material,@emotion/react,@emotion/styled",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "@mui/material": "^7.0.0",
+    "@mui/icons-material": "^7.0.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "eslint": "^9.24.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}

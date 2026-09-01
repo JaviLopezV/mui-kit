@@ -1,4 +1,5 @@
-import "@JaviLopezV/mui-kit/styles.css";
+import { MyUiInitColorSchemeScript } from "@jlopvil/mui-kit/theme";
+import "@jlopvil/mui-kit/styles.css";
 import { Providers } from "./providers";
 
 export default function RootLayout({
@@ -7,8 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body>
+        <MyUiInitColorSchemeScript />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -1,7 +1,7 @@
 "use client";
 
-import { MuiKitProvider } from "@JaviLopezV/mui-kit";
+import { MyUiProvider } from "@jlopvil/mui-kit";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <MuiKitProvider>{children}</MuiKitProvider>;
+  return <MyUiProvider>{children}</MyUiProvider>;
 }

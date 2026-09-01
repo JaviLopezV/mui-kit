@@ -1,85 +1,40 @@
-# @JaviLopezV/mui-kit
+# @jlopvil/mui-kit
 
-Librería de componentes reutilizables basada en Material UI para instalar en proyectos React y Next.js.
-
-## Objetivo del sistema visual
-
-Todos los componentes comparten una misma base:
-
-- **Primario**: azul claro agradable.
-- **Secundario**: blanco con borde azul claro.
-- **Distópico**: oscuro, con personalidad fuerte para acciones destacadas.
-
-Los componentes que lo necesitan aceptan props estándar de Material UI como `color`, `variant`, `size`, `sx`, `fullWidth`, `onClick`, etc.
-
-Ejemplo con botones:
-
-```tsx
-import { Button } from "@JaviLopezV/mui-kit";
-
-export function Actions() {
-  return (
-    <>
-      <Button color="primary" variant="contained">
-        Guardar
-      </Button>
-      <Button color="secondary" variant="contained">
-        Cancelar
-      </Button>
-      <Button color="dystopia" variant="contained">
-        Modo distópico
-      </Button>
-    </>
-  );
-}
-```
-
-## Componentes incluidos
-
-- `MuiKitProvider`
-- `AppShell`
-- `Button`
-- `IconButton`
-- `TextField`
-- `SearchField`
-- `SelectField`
-- `Chip`
-- `Card`
-- `Surface`
-- `Section`
-- `PageHeader`
-- `HeroBanner`
-- `FeatureCard`
-- `StatCard`
-- `InfoAlert`
-- `EmptyState`
-- `DataTable`
+Librería UI central para aplicaciones React y Next.js, construida sobre Material UI 7. La versión actual implementa exclusivamente el alcance P0 de `docs/component-roadmap.md`.
 
 ## Instalación
 
 ```bash
-npm install @JaviLopezV/mui-kit @mui/material @mui/icons-material @emotion/react @emotion/styled
+npm install @jlopvil/mui-kit @mui/material @emotion/react @emotion/styled
 ```
 
-## Uso en Next.js
+React, React DOM, Material UI y Emotion son peer dependencies.
 
-En App Router, crea un provider cliente:
+## Provider
 
 ```tsx
-"use client";
-
-import { MuiKitProvider } from "@JaviLopezV/mui-kit";
+import { MyUiProvider } from "@jlopvil/mui-kit";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <MuiKitProvider>{children}</MuiKitProvider>;
+  return <MyUiProvider>{children}</MyUiProvider>;
 }
 ```
 
-Y úsalo en `app/layout.tsx`:
+El provider instala `CssBaseline` por defecto y soporta esquemas light/dark/system. Admite marca y overrides sin acoplarse a router, i18n o persistencia:
 
 ```tsx
-import { Providers } from "./providers";
-import "@JaviLopezV/mui-kit/styles.css";
+<MyUiProvider
+  defaultMode="system"
+  themeOptions={{ brand: { primary: { main: "#0057b8" } } }}
+>
+  {children}
+</MyUiProvider>
+```
+
+En aplicaciones con SSR, renderiza el bootstrap de color antes del contenido para evitar cambios visuales durante la hidratación:
+
+```tsx
+import { MyUiInitColorSchemeScript } from "@jlopvil/mui-kit/theme";
 
 export default function RootLayout({
   children,
@@ -87,76 +42,83 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <MyUiInitColorSchemeScript />
+        {children}
       </body>
     </html>
   );
 }
 ```
 
-## Uso en React
+## API pública P0
+
+- Theme: `MyUiProvider`, `MyUiInitColorSchemeScript`, `createMyUiTheme` y tokens públicos.
+- Foundation: `Button`, `IconButton`, `Surface`, `Typography`, `Link`.
+- Form: `TextField`, `SelectField<T>`, `Checkbox`, `RadioGroup`.
+- Feedback: `Alert`, `Dialog`, `DialogTitle`, `DialogContent`, `DialogActions`.
+- Layout: `Container`, `Stack`, `Grid`, `Section`.
+- Types: `SemanticTone`, `ControlSize`, `ResponsiveValue`.
+
+Los primitives MUI sin una abstracción propia se reexportan directamente y obtienen su consistencia del tema. No se mantienen wrappers transparentes.
+
+## Ejemplo
 
 ```tsx
-import "@JaviLopezV/mui-kit/styles.css";
 import {
+  Alert,
   Button,
-  FeatureCard,
-  MuiKitProvider,
-  PageHeader,
-  SearchField,
-  StatCard,
-} from "@JaviLopezV/mui-kit";
+  Section,
+  SelectField,
+  Stack,
+  Surface,
+  TextField,
+  Typography,
+} from "@jlopvil/mui-kit";
 
-export default function App() {
+export function Settings() {
   return (
-    <MuiKitProvider>
-      <PageHeader
-        eyebrow="Ventas"
-        title="Dashboard"
-        subtitle="Sistema visual unificado sobre Material UI"
-        actions={<Button color="secondary">Exportar</Button>}
-      />
-
-      <SearchField label="Buscar" sx={{ my: 2 }} />
-
-      <div className="JaviLopezV-card-grid">
-        <FeatureCard
-          title="Ventas"
-          description="Resumen del canal online"
-          badge="Nuevo"
-        />
-        <StatCard
-          label="MRR"
-          value="€12.400"
-          helperText="+8.4% vs mes anterior"
-        />
-      </div>
-    </MuiKitProvider>
+    <Section aria-labelledby="settings-title" maxWidth="md">
+      <Surface variant="outlined" padding="comfortable">
+        <Stack spacing={2}>
+          <Typography id="settings-title" component="h1" variant="h3">
+            Preferencias
+          </Typography>
+          <TextField label="Nombre" />
+          <SelectField
+            label="Idioma"
+            value="es"
+            options={[
+              { value: "es", label: "Español" },
+              { value: "en", label: "English" },
+            ]}
+            onChange={(value) => console.log(value)}
+          />
+          <Alert severity="info">Los cambios se guardan localmente.</Alert>
+          <Button tone="primary">Guardar</Button>
+        </Stack>
+      </Surface>
+    </Section>
   );
 }
 ```
 
-## Colores disponibles
+## Entrypoints
 
-- `primary`
-- `secondary`
-- `dystopia`
+- `@jlopvil/mui-kit`
+- `@jlopvil/mui-kit/components`
+- `@jlopvil/mui-kit/theme`
+- `@jlopvil/mui-kit/types`
+- `@jlopvil/mui-kit/styles.css`
 
-## Scripts
+## Validación
 
 ```bash
-npm run build
 npm run typecheck
+npm run lint
+npm test
+npm run build
 ```
 
-## Publicación
-
-1. Cambia el `name` en `package.json` por tu scope real de npm.
-2. Ejecuta `npm run build`.
-3. Publica con `npm publish --access public`.
-
-## Ejemplo de consumo
-
-Revisa `examples/next-app`.
+Los componentes P1, P2 y P3 no forman parte todavía de la API pública.

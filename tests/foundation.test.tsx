@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { axe } from "vitest-axe";
 import { describe, expect, it, vi } from "vitest";
 import {
+  Box,
   Button,
   IconButton,
   Link,
@@ -59,6 +60,7 @@ describe("foundation components", () => {
   it("keeps direct MUI primitives interoperable through public exports", async () => {
     const { container } = renderWithTheme(
       <main>
+        <Box data-testid="layout-box" sx={{ display: "flex" }} />
         <Typography component="h1" variant="h3">
           Title
         </Typography>
@@ -66,6 +68,7 @@ describe("foundation components", () => {
         <div id="content">Content</div>
       </main>,
     );
+    expect(screen.getByTestId("layout-box")).toHaveClass("MuiBox-root");
     expect(
       (
         await axe(container, {

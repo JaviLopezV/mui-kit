@@ -29,6 +29,8 @@ export type { SectionProps } from "./components/layout/Section";
 // Their system value is supplied by createMyUiTheme component defaults.
 export { default as Alert } from "@mui/material/Alert";
 export type { AlertProps } from "@mui/material/Alert";
+export { default as Box } from "@mui/material/Box";
+export type { BoxProps } from "@mui/material/Box";
 export { default as Checkbox } from "@mui/material/Checkbox";
 export type { CheckboxProps } from "@mui/material/Checkbox";
 export { default as Container } from "@mui/material/Container";

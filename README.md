@@ -58,10 +58,12 @@ export default function RootLayout({
 - Foundation: `Button`, `IconButton`, `Surface`, `Typography`, `Link`.
 - Form: `TextField`, `SelectField<T>`, `Checkbox`, `RadioGroup`.
 - Feedback: `Alert`, `Dialog`, `DialogTitle`, `DialogContent`, `DialogActions`.
-- Layout: `Container`, `Stack`, `Grid`, `Section`.
+- Layout: `Box`, `Container`, `Stack`, `Grid`, `Section`.
 - Types: `SemanticTone`, `ControlSize`, `ResponsiveValue`.
 
 Los primitives MUI sin una abstracción propia se reexportan directamente y obtienen su consistencia del tema. No se mantienen wrappers transparentes.
+
+Los bundles JavaScript conservan la directiva `"use client"` para que los providers y componentes MUI respeten correctamente la frontera cliente en Next.js App Router.
 
 ## Ejemplo
 

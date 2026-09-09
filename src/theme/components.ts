@@ -74,8 +74,32 @@ export const componentDefaults: Components<Theme> = {
       }),
     },
   },
-  MuiCheckbox: { defaultProps: { color: "primary" } },
-  MuiRadio: { defaultProps: { color: "primary" } },
+  MuiCheckbox: {
+    defaultProps: { color: "primary" },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        minWidth: theme.myUi.controlSizes.medium.minHeight,
+        minHeight: theme.myUi.controlSizes.medium.minHeight,
+        "&.Mui-focusVisible": {
+          outline: `2px solid ${theme.palette.primary.main}`,
+          outlineOffset: 2,
+        },
+      }),
+    },
+  },
+  MuiRadio: {
+    defaultProps: { color: "primary" },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        minWidth: theme.myUi.controlSizes.medium.minHeight,
+        minHeight: theme.myUi.controlSizes.medium.minHeight,
+        "&.Mui-focusVisible": {
+          outline: `2px solid ${theme.palette.primary.main}`,
+          outlineOffset: 2,
+        },
+      }),
+    },
+  },
   MuiPaper: {
     defaultProps: { elevation: 0 },
     styleOverrides: { root: { backgroundImage: "none" } },

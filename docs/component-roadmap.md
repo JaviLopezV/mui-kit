@@ -77,6 +77,10 @@ Estados recomendados para el trabajo futuro: `adopt` (conservar/consolidar), `re
 | P2        | `FormActions`             | Quote y wizard flows                                | Alias/uso de `ActionBar`; no crear concepto duplicado                                  | replace |
 | P3        | `ConsentField`            | Quote AJ                                            | Componer `Checkbox` + `Link` + helper; no publicar salvo segunda necesidad compleja    | defer   |
 
+### Piezas de composición P0 disponibles
+
+`Radio`, `FormControl`, `FormControlLabel`, `FormGroup`, `FormLabel` y `FormHelperText` se reexportan como piezas de soporte de `Checkbox` y `RadioGroup`, conservando el contrato MUI. Permiten etiquetado, agrupación y ayudas sin imports adicionales de MUI. `SelectField` incorpora un modo nativo con valores tipados. Estas ampliaciones completan los contratos P0 de formularios.
+
 ## 5. DATA DISPLAY
 
 | Prioridad | Concepto                   | Fuentes                                      | API/alcance definitivo                                                                | Estado  |

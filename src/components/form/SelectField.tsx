@@ -18,6 +18,8 @@ export interface SelectFieldProps<T extends SelectValue> extends Omit<
   MuiTextFieldProps,
   "select" | "value" | "defaultValue" | "onChange" | "children"
 > {
+  /** Use the platform select control instead of the MUI popup. */
+  native?: boolean;
   value: T;
   options: readonly SelectOption<T>[];
   /** Receives the typed value plus the original input event. */
@@ -34,13 +36,26 @@ type SelectFieldComponent = <T extends SelectValue>(
 export const SelectField = React.forwardRef(function SelectField<
   T extends SelectValue,
 >(
-  { options, onChange, emptyOption, value, ...props }: SelectFieldProps<T>,
+  {
+    options,
+    onChange,
+    emptyOption,
+    value,
+    native = false,
+    slotProps,
+    ...props
+  }: SelectFieldProps<T>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) =>
-      onChange(event.target.value as T, event),
-    [onChange],
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      // Native select events serialize numbers. Recover the original option value.
+      const option = options.find(
+        (item) => String(item.value) === String(event.target.value),
+      );
+      if (option && !option.disabled) onChange(option.value, event);
+    },
+    [onChange, options],
   );
 
   return (
@@ -50,21 +65,46 @@ export const SelectField = React.forwardRef(function SelectField<
       value={value}
       onChange={handleChange}
       {...props}
+      slotProps={{
+        ...slotProps,
+        select: (ownerState) => ({
+          ...(typeof slotProps?.select === "function"
+            ? slotProps.select(ownerState)
+            : slotProps?.select),
+          native,
+        }),
+      }}
     >
       {emptyOption !== undefined ? (
-        <MenuItem value="" disabled>
-          {emptyOption}
-        </MenuItem>
+        native ? (
+          <option value="" disabled>
+            {emptyOption}
+          </option>
+        ) : (
+          <MenuItem value="" disabled>
+            {emptyOption}
+          </MenuItem>
+        )
       ) : null}
-      {options.map((option) => (
-        <MenuItem
-          key={String(option.value)}
-          value={option.value}
-          disabled={option.disabled}
-        >
-          {option.label}
-        </MenuItem>
-      ))}
+      {options.map((option) =>
+        native ? (
+          <option
+            key={String(option.value)}
+            value={option.value}
+            disabled={option.disabled}
+          >
+            {option.label}
+          </option>
+        ) : (
+          <MenuItem
+            key={String(option.value)}
+            value={option.value}
+            disabled={option.disabled}
+          >
+            {option.label}
+          </MenuItem>
+        ),
+      )}
     </MuiTextField>
   );
 }) as SelectFieldComponent;

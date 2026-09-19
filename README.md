@@ -173,3 +173,41 @@ Usa IDs únicos por instancia para asociar ayudas y errores. Para checkboxes, co
 ```
 
 Configura el modo mediante la prop `native` del componente; `slotProps.select` permite personalizar el resto de props. En modo nativo, utiliza texto en las etiquetas de opciones. Los valores deben ser únicos también al convertirse a texto (no mezcles `1` y `"1"`). Para una selección inicial vacía, incluye `""` en el tipo del valor y proporciona `emptyOption`.
+
+### LanguageSelector
+
+Selector de idiomas controlado: botón redondeado con icono, código corto y menú
+con el nombre de cada idioma. Incluye navegación por teclado, foco restaurado,
+selección accesible y objetivos táctiles de 44 px. Adapta colores al tema MUI.
+
+```tsx
+import { LanguageSelector } from "@jlopvil/mui-kit";
+
+<LanguageSelector
+  value={locale}
+  label="Seleccionar idioma"
+  options={[
+    { value: "es", label: "Español" },
+    { value: "ca", label: "Català" },
+    { value: "en", label: "English" },
+  ]}
+  onChange={setLocale}
+/>;
+```
+
+`label` es obligatorio y debe llegar traducido. `options` admite `shortLabel` y
+`disabled`. El componente admite `disabled`, `onOpen`, `ref` al botón, `id`,
+`className` y `sx`. `onChange` solo se llama al elegir otro idioma habilitado.
+La aplicación conserva routing, traducciones y persistencia. Los tipos
+`LanguageOption<T>` y `LanguageSelectorProps<T>` también se exportan desde
+`@jlopvil/mui-kit/types`; el componente está disponible en el entrypoint raíz y
+`@jlopvil/mui-kit/components`.
+
+Los seis consumidores del workspace usan `file:../mui-component-library` para
+probar esta API sin una publicación npm. Ejecutar `npm run build` en la librería
+antes de instalar o compilar los consumidores. La opción `.npmrc`
+`install-links=true` instala el paquete sin enlazar sus dependencias de desarrollo,
+evitando mezclar las versiones de React entre proyectos. Tras modificar la
+librería, reconstruirla y reinstalar el paquete local en los consumidores. Para despliegues independientes,
+publicar una versión que incluya esta API y sustituir la dependencia local por
+esa versión.

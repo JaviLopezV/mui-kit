@@ -203,3 +203,12 @@ Un componente no pasa a público hasta cumplir:
 - changelog y guía breve de adopción.
 
 Este roadmap es de diseño. No implica todavía implementar, retirar ni migrar ningún componente.
+
+## Ampliación solicitada: LanguageSelector
+
+Composición aprobada explícitamente para unificar los selectores de
+`arrow-learn-games`, `personal-and-pilates`, `javier-lopez-portfolio`,
+`arrow-cv-builder`, `arrow-template-web` y `lidia-villanueva-bolivar`.
+El portfolio proporciona la referencia visual. La librería solo controla la
+presentación y apertura del menú; cada consumidor aporta idiomas, etiquetas,
+valor y callback. Routing, traducciones y persistencia permanecen locales.

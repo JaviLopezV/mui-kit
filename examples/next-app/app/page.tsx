@@ -3,6 +3,7 @@
 import * as React from "react";
 import {
   Alert,
+  LanguageSelector,
   Button,
   Checkbox,
   FormControl,
@@ -40,7 +41,7 @@ export default function Page() {
             required
             helperText="Introduce un nombre visible."
           />
-          <SelectField
+          <LanguageSelector
             label="Idioma"
             value={language}
             options={[

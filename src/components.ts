@@ -59,3 +59,8 @@ export { default as FormLabel } from "@mui/material/FormLabel";
 export type { FormLabelProps } from "@mui/material/FormLabel";
 export { default as Radio } from "@mui/material/Radio";
 export type { RadioProps } from "@mui/material/Radio";
+export { LanguageSelector } from "./components/navigation/LanguageSelector";
+export type {
+  LanguageOption,
+  LanguageSelectorProps,
+} from "./components/navigation/LanguageSelector";
